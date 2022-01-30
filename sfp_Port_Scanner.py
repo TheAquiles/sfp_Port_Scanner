@@ -20,6 +20,8 @@ def analisys():
     Report=nm.csv()
     Results = open("Report.txt", "w")
     Results.write(Report)
+ 
+#I found nessesary the use of a definition, as I tried to execute command by command and It didnt generate clear display of the ports if it wasn't this way.
 
 class sfp_new_module(SpiderFootPlugin):
 
@@ -78,13 +80,13 @@ class sfp_new_module(SpiderFootPlugin):
             print(f"We use the data: {eventData}")
 
             analisys()
-            Ports =str(subprocess.check_output("cut -d ';' -f 5,6,7 Report.txt", shell=True))
+            Ports =str(subprocess.check_output("cut -d ';' -f 5,6,7 Report.txt", shell=True))         
             PortsCleanUp1 = Puertos.replace("\\n", "\n")
             PortsCleanUp2 = PortsCleanUp1.replace("b\'", "")
             PortsCleanUp3 = PortsCleanUp2.replace(";", " ")
             PortsCleanUp4 = PortsCleanUp3.replace("\'", "")
             data = PortsCleanUp4
-
+#It could be better if I could use the "Report" variable to cut or split the results, but so far this is what has given me solid outputs
             if not data:
                 self.sf.error("Unable to perform <ACTION MODULE> on " + eventData)
                 return
